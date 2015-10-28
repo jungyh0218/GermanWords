@@ -2,6 +2,7 @@ package vr.midterm;
 
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -74,6 +75,12 @@ public class WordListFragment extends ListFragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //((TextView)getActivity().findViewById(R.id.editText3)).setText("");
     }
 
     @Override
@@ -157,6 +164,7 @@ public class WordListFragment extends ListFragment {
             }
         });
     }
+
 
 
 }
