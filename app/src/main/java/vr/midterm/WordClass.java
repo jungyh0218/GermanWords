@@ -9,6 +9,7 @@ public class WordClass {
     public static final int ADJECTIVE = 2;
     public static final int ADVERB= 3;
     public static final int ETC = 4;
+    public static final String[] wordclass = {"명사", "동사", "형용사", "부사", "기타"};
 
 
 }

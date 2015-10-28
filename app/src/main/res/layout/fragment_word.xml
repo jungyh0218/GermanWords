@@ -1,9 +1,25 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="vr.midterm.WordFragment">
+    android:layout_height="match_parent" tools:context="vr.midterm.WordFragment"
+    android:background="#4400ff55">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-       android:id="@+id/textView2" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+           android:id="@+id/textView2" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="상세보기"
+            android:id="@+id/button3"
+            android:visibility="invisible"
+            android:onClick="on"/>
+    </LinearLayout>
 
 </FrameLayout>

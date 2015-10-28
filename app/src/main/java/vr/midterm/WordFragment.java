@@ -1,12 +1,14 @@
 package vr.midterm;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -109,7 +111,14 @@ public class WordFragment extends Fragment {
 
     public void updateView(String string){
         TextView textView = ((TextView)(getActivity().findViewById(R.id.textView2)));
-        textView.setText(string);
+        Cursor cur = getActivity().getApplicationContext().getContentResolver().query(WordInfoProvider.CONTENT_URI, null,
+                " where upper(german)=upper('" + string + "');", null, null);
+        getActivity().startManagingCursor(cur);
+        cur.moveToNext();
+        String koreanString = cur.getString(2);
+        textView.setText(koreanString);
+        Button activityButton = ((Button)(getActivity().findViewById(R.id.button3)));
+        activityButton.setVisibility(View.VISIBLE);
     }
 
 }

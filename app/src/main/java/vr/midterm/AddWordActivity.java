@@ -1,6 +1,7 @@
 package vr.midterm;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +35,6 @@ public class AddWordActivity extends AppCompatActivity implements AdapterView.On
         //sp.setPrompt("품사 선택"); // 스피너 제목
         sp.setAdapter(adapter);
         sp.setOnItemSelectedListener(this);
-
     }
 
     @Override
@@ -62,16 +62,29 @@ public class AddWordActivity extends AppCompatActivity implements AdapterView.On
         String korean = ((TextView)findViewById(R.id.editText2)).getText().toString();
         int wordclass = ((Spinner)findViewById(R.id.spinner)).getSelectedItemPosition();
         int gender = -1;
-        if(((RadioGroup)findViewById(R.id.radioGroup)).isSelected()){
-            gender = ((RadioGroup)findViewById(R.id.radioGroup)).getCheckedRadioButtonId();
+
+        RadioGroup group = (RadioGroup)findViewById(R.id.radioGroup);
+        if(group.getCheckedRadioButtonId() != -1) {
+
+            switch (group.getCheckedRadioButtonId()) {
+                case R.id.radioButton:
+                    gender = 0;
+                    break;
+                case R.id.radioButton2:
+                    gender = 1;
+                    break;
+                case R.id.radioButton3:
+                    gender = 2;
+                    break;
+            }
         }
+
         ContentValues values = new ContentValues();
         values.put("german", german);
         values.put("korean", korean);
         values.put("wordclass", wordclass);
-        if(gender != -1){
-            values.put("gender", gender);
-        }
+        values.put("gender", gender);
+
         getContentResolver().insert(WordInfoProvider.CONTENT_URI, values);
         finish();
     }

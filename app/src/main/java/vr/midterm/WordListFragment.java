@@ -18,6 +18,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 
 /**
@@ -164,7 +165,6 @@ public class WordListFragment extends ListFragment {
             }
         });
     }
-
 
 
 }

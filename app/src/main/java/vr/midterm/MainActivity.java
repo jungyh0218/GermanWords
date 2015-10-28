@@ -40,6 +40,8 @@ public class MainActivity extends ListActivity {
                 startActivity(intent);
                 break;
             case 2:
+                intent = new Intent(MainActivity.this, PreferenceActivity.class);
+                startActivity(intent);
                 Log.i("ListActivity", "case 2");
                 break;
         }

@@ -21,9 +21,13 @@
         </activity>
         <activity android:name=".WordInfoActivity" >
         </activity>
+
         <provider
-            android:authorities="vr.midterm.GermanDictionary"
-            android:name=".WordInfoProvider"/>
+            android:name=".WordInfoProvider"
+            android:authorities="vr.midterm.GermanDictionary" />
+
+        <activity android:name=".PreferenceActivity" >
+        </activity>
     </application>
 
 </manifest>
