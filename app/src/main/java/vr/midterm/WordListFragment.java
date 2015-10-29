@@ -1,7 +1,9 @@
 package vr.midterm;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -128,6 +130,7 @@ public class WordListFragment extends ListFragment {
         getListView().setItemChecked(position, true);
     }
 
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -164,7 +167,71 @@ public class WordListFragment extends ListFragment {
                 setListAdapter(adapt);
             }
         });
+
+        ListView listView = getListView();
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                final String items[] = { "수정", "삭제" };
+                AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
+                ab.setTitle("Select");
+                Cursor item = (Cursor)parent.getItemAtPosition(position);
+                final String wordString;
+                wordString = item.getString(item.getColumnIndex("german"));
+                ab.setSingleChoiceItems(items, 0,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // 각 리스트를 선택했을때
+
+                            }
+                        }).setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Log.d("Dialog", "onClick");
+                                Intent intent;
+                                dialog.dismiss();
+                                int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+                                switch(selectedPosition){
+                                    case 0:
+                                        intent = new Intent(getActivity().getApplicationContext(), FixWordActivity.class);
+                                        intent.putExtra("Word",wordString);
+                                        startActivity(intent);
+                                        break;
+                                    case 1:
+                                        getActivity().getApplicationContext().getContentResolver().delete(WordInfoProvider.CONTENT_URI,
+                                                "upper('"+wordString+"')", null);
+                                        Cursor cur = getActivity().getApplicationContext().getContentResolver().query(WordInfoProvider.CONTENT_URI,
+                                                null, " where upper(german)=upper('" + wordString + "')", null, null);
+                                        getActivity().startManagingCursor(cur);
+                                        ListAdapter adapt = new SimpleCursorAdapter(
+                                                getContext(),
+                                                android.R.layout.simple_list_item_1,
+                                                cur,
+                                                new String[]{"german"},
+                                                new int[]{android.R.id.text1}
+                                        );
+                                        setListAdapter(adapt);
+                                        TextView tv = (TextView)getActivity().findViewById(R.id.textView2);
+                                        tv.setText("");
+                                        Button button = (Button)getActivity().findViewById(R.id.button3);
+                                        button.setVisibility(View.INVISIBLE);
+                                        break;
+                                }
+                            }
+                        }).setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // Cancel 버튼 클릭시
+                            }
+                        });
+                ab.create();
+                ab.show();
+
+                return false;
+            }
+        });
     }
+
 
 
 }

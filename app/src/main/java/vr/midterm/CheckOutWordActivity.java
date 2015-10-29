@@ -1,6 +1,9 @@
 package vr.midterm;
 
+import android.app.Fragment;
+import android.app.ListFragment;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -9,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class CheckOutWordActivity extends FragmentActivity implements WordListFragment.OnWordSelectedListener, WordFragment.OnFragmentInteractionListener{
@@ -21,9 +26,9 @@ public class CheckOutWordActivity extends FragmentActivity implements WordListFr
         Button activityButton = ((Button)(findViewById(R.id.button3)));
         activityButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent intent = new Intent(CheckOutWordActivity.this, WordInfoActivity.class);
-                intent.putExtra("Word", ((TextView)(findViewById(R.id.editText3))).getText().toString());
+                intent.putExtra("Word", ((TextView) (findViewById(R.id.editText3))).getText().toString());
                 startActivity(intent);
             }
         });
@@ -40,4 +45,5 @@ public class CheckOutWordActivity extends FragmentActivity implements WordListFr
         WordFragment defFrag = (WordFragment)getFragmentManager().findFragmentById(R.id.fragment2);
         defFrag.updateView(word);
     }
+
 }

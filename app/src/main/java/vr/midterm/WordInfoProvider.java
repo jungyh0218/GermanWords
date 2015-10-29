@@ -100,7 +100,7 @@ public class WordInfoProvider extends ContentProvider{
                 cnt = mDB.delete("word", selection, selectionArgs);
                 break;
             case GETONE:
-                String where = "german = '" + uri.getPathSegments().get(1) + "'";
+                String where = "upper(german) = "+selection+";";
                 if (TextUtils.isEmpty(selection) == false) {
                     where += " AND " + selection;
                 }
@@ -119,7 +119,7 @@ public class WordInfoProvider extends ContentProvider{
                 cnt = mDB.update("word", values, selection, selectionArgs);
                 break;
             case GETONE:
-                String where = "german = '" + uri.getPathSegments().get(1) + "'";
+                String where = "_id = " + selection;
                 if (TextUtils.isEmpty(selection) == false) {
                     where += " AND " + selection;
                 }

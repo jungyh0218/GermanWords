@@ -28,6 +28,8 @@
 
         <activity android:name=".PreferenceActivity" >
         </activity>
+        <activity android:name=".FixWordActivity" >
+        </activity>
     </application>
 
 </manifest>
