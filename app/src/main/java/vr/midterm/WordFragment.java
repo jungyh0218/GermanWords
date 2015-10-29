@@ -70,6 +70,15 @@ public class WordFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_word, container, false);
     }
 
+    @Override
+    public void onStart() {
+        TextView textView = (TextView)getActivity().findViewById(R.id.textView2);
+        textView.setText("");
+        Button button = (Button)getActivity().findViewById(R.id.button3);
+        button.setVisibility(View.INVISIBLE);
+        super.onStart();
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -120,5 +129,6 @@ public class WordFragment extends Fragment {
         Button activityButton = ((Button)(getActivity().findViewById(R.id.button3)));
         activityButton.setVisibility(View.VISIBLE);
     }
+
 
 }
